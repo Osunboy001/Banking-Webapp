@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --blue: blue;
+  --blue-light: rgba(0, 0, 255, 0.08);
+  --blue-shadow: rgba(0, 0, 255, 0.3);
+  --text-dark: #0d0d1a;
+  --text-mid: #444466;
+  --text-soft: #888aaa;
+  --bg: #eef0f8;
+  --card: #ffffff;
+  --border: #dde0f0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 48px 24px 80px;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.bank-header {
+  background: var(--blue);
+  border-radius: 24px;
+  padding: 44px 52px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 48px var(--blue-shadow);
+}
+
+.bank-header::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+
+.bank-header::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  right: 80px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+
+.bank-header h1 {
+  font-size: 52px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  position: relative;
+  z-index: 1;
+}
+
+.bank-header p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 10px;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+/* SECTION CARD */
+.users-section,
+.add-user-section {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 40px 44px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+.users-section h2,
+.add-user-section h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.users-section h2::before,
+.add-user-section h2::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 30px;
+  background: var(--blue);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* USER-LIST */
+.users-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.users-list li {
+  background: #f7f8fd;
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 26px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.users-list li:hover {
+  border-color: blue;
+  background: var(--blue-light);
+  box-shadow: 0 8px 28px rgba(0,0,255,0.12);
+  transform: translateY(-2px);
+}
+
+/* User Info */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-info strong {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
+}
+
+.user-info .balance {
+  font-size: 20px;
+  font-weight: 600;
+  color: blue;
+}
+
+/* ── Deposit Button ── */
+.deposit-btn {
+  background: blue;
+  color: white;
+  padding: 15px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Sora', sans-serif;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px var(--blue-shadow);
+}
+
+.deposit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px var(--blue-shadow);
+  filter: brightness(1.2);
+}
+
+.deposit-btn:active {
+  transform: translateY(0);
+}
+
+/* FORM */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 17px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 500;
+  color: var(--text-dark);
+  background: #f7f8fd;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: blue;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #bbbbd4;
+  font-weight: 400;
+}
+
+.form-group input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Submit Button ── */
+.submit-btn {
+  width: 100%;
+  padding: 18px;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Sora', sans-serif;
+  letter-spacing: 0.3px;
+  margin-top: 28px;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 20px var(--blue-shadow);
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px var(--blue-shadow);
+  filter: brightness(1.15);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/*
+   RESPONSIVE
+ */
+@media (max-width: 768px) {
+  body {
+    padding: 24px 16px 60px;
+  }
+
+  .bank-header {
+    padding: 36px 28px;
+  }
+
+  .bank-header h1 {
+    font-size: 38px;
+  }
+
+  .bank-header p {
+    font-size: 16px;
+  }
+
+  .users-section,
+  .add-user-section {
+    padding: 32px 24px;
+  }
+
+  .users-section h2,
+  .add-user-section h2 {
+    font-size: 22px;
+  }
+
+  .users-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 22px 24px;
+  }
+
+  .deposit-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bank-header h1 {
+    font-size: 30px;
+  }
+
+  .user-info strong {
+    font-size: 20px;
+  }
+
+  .user-info .balance {
+    font-size: 18px;
+  }
+
+  .users-section h2,
+  .add-user-section h2 {
+    font-size: 20px;
+  }
+}
