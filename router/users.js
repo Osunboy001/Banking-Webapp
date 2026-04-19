@@ -2,15 +2,17 @@ const express = require('express')
   const router = express.Router()
 
 
-const {displayEditUser,userUpdateDeposit, userDeposit, userWithdraw} = require('../controller/user')
+const {  getUserByAccount, deposit, withdraw} = require('../controller/user')
 
 
- 
 
-  router.get('/:id',  displayEditUser)
 
-  router.put('/:id', userDeposit )
+  router.get('/:accountNumber',  getUserByAccount )
 
-  router.put('/:id/withdraw', userWithdraw )
+  router.put('/:accountNumber/deposit', deposit )
 
-  module.exports = router
+  router.put('/:accountNumber', withdraw )
+
+
+module.exports = router
+

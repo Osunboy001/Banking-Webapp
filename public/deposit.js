@@ -7,17 +7,17 @@ const currentBalance = document.getElementById('currentBalance');
 
 // Set userId from URL parameter if present
 const urlParams = new URLSearchParams(window.location.search);
-const userIdFromUrl = urlParams.get('id');
-if (userIdFromUrl) {
-  userIdInput.value = userIdFromUrl;
-  fetchUserBalance(userIdFromUrl);
+const accountNumberFromUrl = urlParams.get('accountNumber');
+if (accountNumberFromUrl) {
+  userIdInput.value = accountNumberFromUrl;
+  fetchUserBalance(accountNumberFromUrl );
 }
 
 // My user id change fetch diplay and show user balance
 userIdInput.addEventListener('change', () => {
-const userId = userIdInput.value.trim();
-if(userId) {
-  fetchUserBalance(userId);
+const accountNumber = userIdInput.value.trim();
+if(accountNumber) {
+  fetchUserBalance(accountNumber);
 
 }
 else {
@@ -25,9 +25,10 @@ else {
 }
 });
 
-async function fetchUserBalance(userId) {
+async function fetchUserBalance(accountNumber) {
   try {
-    const res = await fetch(`/users/${userId}`);
+console.log("User:", accountNumber);
+    const res = await fetch(`/users/${accountNumber}`);
     if (res.ok) {
       const user = await res.json();
       currentBalance.textContent = `Current Balance: #${user.balance.toLocaleString()}`;
@@ -42,17 +43,17 @@ async function fetchUserBalance(userId) {
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const userId = userIdInput.value.trim();
+  const accountNumber = userIdInput.value.trim();
   const amount = amountInput.value.trim();
 
-  if (!userId || !amount) {
+  if (!accountNumber || !amount) {
     showResult('Please enter both account number and amount', 'error');
     return;
   }
 
   try {
-    const res = await fetch(`/users/${userId}
-      `, {
+    const res = await fetch(`/users/${accountNumber}/deposit`, 
+      {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount: Number(amount) })
@@ -62,7 +63,7 @@ form.addEventListener('submit', async (e) => {
       const data = await res.json();
       showResult(`Deposit Successful!\nNew Balance: #${data.balance.toLocaleString()}`, 'success');
       amountInput.value = '';
-      fetchUserBalance(userId);
+      fetchUserBalance(accountNumber);
     } else {
       showResult('Error: Account not found', 'error');
     }
@@ -75,6 +76,6 @@ form.addEventListener('submit', async (e) => {
 function showResult(message, type) {
   result.textContent = message;
   result.className = 'show ' + type;
-}
+}    
 
 

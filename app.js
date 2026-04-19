@@ -1,6 +1,7 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
-
+const connectDB = require('./db/connect')
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static('./public'))
@@ -25,11 +26,24 @@ app.post('/users', (req, res) => {
 const {name, balance} = req.body;
 const myNewUser = {id: myuser.length + 1, name: name, balance: 0};
 myuser.push(myNewUser);
-console.log(name, balance);
+console.log(name, balance); 
 res.redirect('/');
 }
 )
 
-app.listen(5000, () => {
-  console.log('Server is running on port 5000');
-})  
+const port = process.env.PORT || 5000;
+
+const start = async () => {
+  
+  try {
+  await connectDB(process.env.MONGO_URI)
+    app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
+

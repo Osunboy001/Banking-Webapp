@@ -1,16 +1,27 @@
-const {myuser} = require('../data')
+const myUser = require('../model/user');
 
-const userDashboard = (req, res) => {
-    let list = myuser.map(user => `
+const userDashboard =   (req, res) => {
+  
+    let list = myUser.map(user => `
       <li>
+
         <div class="user-info">
           <strong>${user.name}</strong>
           <span class="balance">#${user.balance.toLocaleString()}</span>
         </div>
-        <a href="/deposit.html?id=${user.id}" class="deposit-btn">Deposit</a>
-          <a href="/withdraw.html?id=${user.id}" class="deposit-btn">Withdraw</a>
+       <a href="/deposit.html?accountNumber=${user.accountNumber}" class="deposit-btn">
+  Deposit
+</a>        
+ <a href="/withdraw.html?accountNumber=${user.accountNumber}" class="deposit-btn">Withdraw</a>
+
+ 
       </li>
-    `).join('');
+
+
+    `
+  
+  
+  ).join('');
     res.send(`
       <!DOCTYPE html>
       <html lang="en">
@@ -51,8 +62,12 @@ const userDashboard = (req, res) => {
         </div>
       </body>
       </html>
-        `);
-}
+  
+  
+      `);}
+
+
+      
 
 
 
