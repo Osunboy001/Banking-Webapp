@@ -32,6 +32,7 @@ console.log("User:", accountNumber);
     if (res.ok) {
       const user = await res.json();
       currentBalance.textContent = `Current Balance: #${user.balance.toLocaleString()}`;
+      console.log(user)``
     } else {
       currentBalance.textContent = 'Account not found';
     }

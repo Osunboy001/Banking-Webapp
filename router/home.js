@@ -3,14 +3,10 @@
 const express = require('express')
   const router = express.Router()
 
+const userDashboard = require('../controller/dashboard')
+const authmiddleware = require('../middleware/auth')
 
-
-
-
-
-const {userDashboard} = require('../controller/home')
-
- router.get('/', userDashboard )
+ router.get('/dashboard', authmiddleware, userDashboard )
 
 
 
