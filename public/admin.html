@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NairaBank Admin</title>
+<link rel="stylesheet" href="admindasbord.css">
+</head>
+<body>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="brand">NairaBank</div>
+  <div class="menu">
+    <a href="#">Overview</a>
+    <a href="#">All Users</a>
+    <a href="#">Transactions</a>
+    <a href="#">Block User</a>
+    <a href="#">Settings</a>
+
+  </div>
+</div>
+ 
+<!-- MAIN -->
+<div class="main" id="main">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+      <div>
+           
+        <h1>Admin Dashboard</h1>
+        <p>Manage your users, balances and account activity</p>
+      </div>
+    </div>
+  </div>
+<button class="logout" onclick="logout()">Logout</button>
+  <!-- CARDS -->
+  <div class="cards">
+    <div style="background-color: #1e88e5;" class="card">
+      <h3 style="color: white;">Total Users</h3>
+      <p style="color: white;">1,240</p>
+    </div>
+    <div style="background-color:green ;" class="card">
+      <h3  style="color: white;">Total Balance</h3>
+      <p style="color: white;">₦48.2M</p>
+    </div>
+    <div style="background-color: orange ;" class="card">
+      <h3 style="color: white;">Active Today</h3>
+      <p style="color: white;">342</p>
+    </div>
+    <div style="background-color: red;" class="card">
+      <h3 style="color: white;">Blocked</h3>
+      <p style="color: white;">12</p>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-box">
+    <input type="text" placeholder="Search account number..." onkeyup="searchUser()" id="search"/>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Account</th>
+          <th>Balance</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="users">
+        <tr>
+          <td>Ifeoluwa</td>
+          <td>4521839027</td>
+          <td>₦50,000</td>
+          <td><span class="status active">Active</span></td>
+          <td>
+            <button class="btn view">View</button>
+        <button class="btn block" onclick="blockUser('${user._id}')">
+  Block
+</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Chidi Okeke</td>
+          <td>7823910456</td>
+          <td>₦120,500</td>
+          <td><span class="status active">Active</span></td>
+          <td>
+            <button class="btn view">View</button>
+           <button class="btn block" onclick="blockUser('${user._id}')">
+  Block
+</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Amaka Nwosu</td>
+          <td>1234567890</td>
+          <td>₦5,000</td>
+          <td><span class="status blocked">Blocked</span></td>
+          <td>
+            <button class="btn view">View</button>
+        <button class="btn block" onclick="blockUser('${user._id}')">
+  Block
+</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<script src="admindashboard.js"></script>
+</body>
+</html>

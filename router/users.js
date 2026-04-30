@@ -7,12 +7,13 @@ const {  getUserByAccount, deposit, withdraw} = require('../controller/user')
 
 
 
-  router.get('/:accountNumber',  getUserByAccount )
+  router.get('/:accountnumber',  getUserByAccount )
 
-  router.put('/:accountNumber/deposit', deposit )
+  router.put('/:accountnumber/deposit',authMiddleware, deposit )
 
-  router.put('/:accountNumber', withdraw )
+  router.put('/:accountnumber', withdraw )
 
 
 module.exports = router
 
+ 

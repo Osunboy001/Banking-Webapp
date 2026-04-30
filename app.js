@@ -15,9 +15,10 @@ app.use((req, res, next) => {
 
 const users =  require('./router/users')
 const auth = require('./router/auth')
-
-app.use('/users', users)
+const adminDashboard = require('./router/admindashboard')
+app.use('/api/v1/users', users)
 app.use('/api/v1/auth', auth )
+app.use('/api/v1/admin', adminDashboard)
 
 const home = require('./router/home')
 app.use('/api/v1', home)
@@ -37,6 +38,7 @@ const start = async () => {
   
   try {
   await connectDB(process.env.MONGO_URI)
+  
     app.listen(port, () =>
       console.log(`Server is listening on port ${port}...`)
     );

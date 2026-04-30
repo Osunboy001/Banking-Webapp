@@ -23,14 +23,29 @@ const userSchema = new mongoose.Schema({
 
   balance: {
     type: Number,
-    default: 0
+    default: 10000
   },
 
 
   accountnumber: {
     type: String,
     unique: true
-  }
+  },
+
+  
+  role : {
+ type: String,
+  enum: ['user', 'admin'],
+  default: 'user'
+  },
+
+status: {
+  type: String,
+  enum: ["active", "blocked"],
+  default: "active"
+}
+
+
 });
 
 
@@ -47,7 +62,7 @@ userSchema.pre('save', async function() {
 // FIXED — only one createJWT
 userSchema.methods.createJWT = function() {
   return jwt.sign(
-    { userId: this._id, name: this.name },
+    { userId: this._id, name: this.name, role: this.role },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_LIFETIME || '7d' }
   )

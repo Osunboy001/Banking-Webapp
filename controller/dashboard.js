@@ -1,6 +1,8 @@
    
    
    const myuser = require('../model/user')
+
+  //  Find each user and update
    
    const userDashboard = async (req, res) => {
       try {
@@ -24,4 +26,6 @@
       }
     }
 
-    module.exports = userDashboard
+
+
+module.exports = userDashboard

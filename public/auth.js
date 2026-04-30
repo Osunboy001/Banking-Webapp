@@ -17,40 +17,41 @@ async function request(endpoint, method, body) {
   });
 
 
-if (!res.ok) {
-  setError(data.message); 
-  return;
+    if (!res.ok) {
+        showResult('Incorrect email or password', 'error');
+        return;
+    }
+
+    const data = await res.json();
+    console.log(token);
+
+    return data;
+
+} catch (error) {
+    showResult('Error: ' + error.message, 'error');
 }
-    return res.json();
-   console.log(token)
-  
-}
-  
-
- 
-catch (error) {
-    formAlertDOM.style.display = 'block'
-    formAlertDOM.textContent = error.response.data.msg
-    localStorage.removeItem('token')
-    resultDOM.innerHTML = ''
-    tokenDOM.textContent = 'no token present'
-    tokenDOM.classList.remove('text-success')
-  }
-
-
 
 }
 
 async function login() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
-  if (!email || !password) return alert("Fill all fields");
 
   const data = await request("/auth/signin", "POST", { email, password });
-  if (!data.token) return alert(data.message || "Login failed");
+
+  if (!data || !data.token) return alert("Login failed");
+
+  // decode user from token
+  const payload = JSON.parse(atob(data.token.split('.')[1]));
 
   localStorage.setItem("token", data.token);
-  localStorage.setItem("user", JSON.stringify(data.user));
+  localStorage.setItem("user", JSON.stringify(payload));
+
+  if (payload.role === "admin") {
+    window.location.href = "/admin.html";
+    return;
+  }
+
   showDashboard();
   loadDashboard();
 }
@@ -59,7 +60,11 @@ async function signup() {
   const name = document.getElementById("signupName").value;
   const email = document.getElementById("signupEmail").value;
   const password = document.getElementById("signupPassword").value;
-  if (!name || !email || !password) return alert("Fill all fields");
+  if (!name || !email || !password) {
+    showResult('Please fill all fields', 'error');
+    
+    return;
+  }
 
   const data = await request("/auth/signup", "POST", { name, email, password });
   if (!data.token) return alert(data.message || "Signup failed");
@@ -78,7 +83,7 @@ async function loadDashboard() {
 
 function renderDashboard(data) {
  document.querySelector("#username").innerHTML = `<h1 style="color: ;">Hi, ${data.user?.name || data.name}</h1>`;
-  document.querySelector("#balance").textContent =` #${data.balance}`;
+  document.querySelector("#balance").textContent =` #${data.balance.toLocaleString()} ` ;
     document.querySelector("#accountnumber").textContent =`  acctnumber:${data.accountnumber} ` ;
   
 }
@@ -109,21 +114,31 @@ function logout() {
   showLogin();
 }
 
-function initapp () {
-  const token = localStorage.getItem('token')
-  const user = localStorage.getItem('user')
-  if(token && user) {
-    showDashboard()
-    loadDashboard()
-  }
-  else {
-    showLogin
-  }
+// error function
+function showResult(message, type) {
+  result.textContent = message;
+  result.className = 'show ' + type;
 }
 
 
-initapp()
+function initapp () {
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
 
+console.log("USER FROM STORAGE:", user)
+
+  if (token && user) {
+showDashboard()
+      loadDashboard()
+
+}
+   
+ else {
+    showLogin()
+  }
+}
+
+initapp()
 
 function myFunction() {
   var x = document.getElementById("loginPassword");
@@ -142,3 +157,5 @@ function myFunc() {
     y.type = "password";
   }
 }
+
+

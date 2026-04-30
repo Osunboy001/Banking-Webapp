@@ -1,82 +1,48 @@
-
 const form = document.getElementById('depositForm');
 const userIdInput = document.getElementById('userId');
 const amountInput = document.getElementById('amount');
 const result = document.getElementById('result');
 const currentBalance = document.getElementById('currentBalance');
-
-// Set userId from URL parameter if present
-const urlParams = new URLSearchParams(window.location.search);
-const accountNumberFromUrl = urlParams.get('accountNumber');
-if (accountNumberFromUrl) {
-  userIdInput.value = accountNumberFromUrl;
-  fetchUserBalance(accountNumberFromUrl );
-}
-
-// My user id change fetch diplay and show user balance
-userIdInput.addEventListener('change', () => {
-const accountNumber = userIdInput.value.trim();
-if(accountNumber) {
-  fetchUserBalance(accountNumber);
-
-}
-else {
-  currentBalance.textContent = 'Enter account number to see balance';
-}
-});
-
-async function fetchUserBalance(accountNumber) {
-  try {
-console.log("User:", accountNumber);
-    const res = await fetch(`/users/${accountNumber}`);
-    if (res.ok) {
-      const user = await res.json();
-      currentBalance.textContent = `Current Balance: #${user.balance.toLocaleString()}`;
-      console.log(user)``
-    } else {
-      currentBalance.textContent = 'Account not found';
-    }
-  } catch (error) {
-    currentBalance.textContent = 'Error loading account';
-    console.error('Error:', error);
-  }
-}
+const BASE_URL = "http://localhost:3000/api/v1";
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const accountNumber = userIdInput.value.trim();
   const amount = amountInput.value.trim();
+  const token = localStorage.getItem('token');
 
   if (!accountNumber || !amount) {
-    showResult('Please enter both account number and amount', 'error');
     return;
+    showResult('Please enter both account number and amount', 'error');
   }
 
   try {
-    const res = await fetch(`/users/${accountNumber}/deposit`, 
-      {
+    const res = await fetch(`${BASE_URL}/users/${accountNumber}/deposit`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ? `Bearer ${token}` : ""
+      },
       body: JSON.stringify({ amount: Number(amount) })
     });
 
     if (res.ok) {
       const data = await res.json();
-      showResult(`Deposit Successful!\nNew Balance: #${data.balance.toLocaleString()}`, 'success');
+      currentBalance.textContent = `Current Balance: ₦${data.balance.toLocaleString()}`;
+      showResult(`Deposit Successful! New Balance: ₦${data.balance.toLocaleString()}`, 'success');
       amountInput.value = '';
-      fetchUserBalance(accountNumber);
     } else {
       showResult('Error: Account not found', 'error');
     }
   } catch (error) {
     showResult('Error: ' + error.message, 'error');
-    console.error('Error:', error);
   }
 });
 
+
+
+// error function
 function showResult(message, type) {
   result.textContent = message;
   result.className = 'show ' + type;
-}    
-
-
+}

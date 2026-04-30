@@ -28,4 +28,3 @@ let myuser = [
 
 
 module.exports = {myuser} 
-module.exports = {myuser} 
