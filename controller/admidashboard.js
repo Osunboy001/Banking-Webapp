@@ -73,7 +73,28 @@ const getAllUserBalance = async (req, res) => {
 
 
 
+const blockUser = async (req, res) => {
+  try {
+    const userId = req.params.id
+    const user = await myUser.findById(userId)  
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
 
+    res.status(200).json({ message: `User ${user.status === 'blocked' ? 'unblocked' : 'blocked'} successfully` })
+
+    user.status = user.status === 'blocked' ? 'active' : 'blocked'
+    await user.save()
+
+console.log(`User ${user.status === 'blocked' ? 'blocked' : 'unblocked'}:`, user)
+
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+
+
+
+}
 
 
 
@@ -81,7 +102,8 @@ const getAllUserBalance = async (req, res) => {
   module.exports = {
 
 getAllUser,
-getAllUserBalance
+getAllUserBalance,
+blockUser
   }
 
 

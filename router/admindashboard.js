@@ -16,6 +16,7 @@ router.get('/users', authMiddleware, getAllUser)
 //  GET DASHBOARD STATS
 router.get('/stats', authMiddleware, getAllUserBalance)
 
+router.patch('/:id/block', authMiddleware, blockUser)
 
 module.exports = router
 

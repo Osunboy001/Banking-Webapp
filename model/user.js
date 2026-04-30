@@ -51,7 +51,7 @@ status: {
 
 userSchema.pre('save', async function() {
   if (this.isNew) {
-    this.accountnumber = Math.floor(1000000000 + Math.random() * 9000000000).toString()
+    this.accountnumber ="005" + Math.floor(Math.random() * 9000000).toString()
   }
 
   const salt = await bcrypt.genSalt(10);
