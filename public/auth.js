@@ -38,9 +38,8 @@ async function login() {
   const password = document.getElementById("loginPassword").value;
 
   const data = await request("/auth/signin", "POST", { email, password });
-
-  if (!data || !data.token) return alert("Login failed");
-
+  if (!data.token) return alert(data.message || "Login failed");  
+  
   // decode user from token
   const payload = JSON.parse(atob(data.token.split('.')[1]));
 

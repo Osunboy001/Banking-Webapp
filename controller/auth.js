@@ -21,21 +21,28 @@ res.status(StatusCodes.CREATED).json({user:{name:user.name},token})
 }
 
 
-const signin = async (req,res) => {
-  const {email,password} = req.body
-const user = await User.findOne({ email })
-  if(!user) {
-    throw new  unauth('User does not exist')
+const signin = async (req, res) => {
+  const { email, password } = req.body
+
+  const user = await User.findOne({ email })
+  if (!user) throw new unauth('User does not exist')
+
+  const isPasswordCorrect = await user.comparePassword(password)
+  if (!isPasswordCorrect) throw new unauth("Invalid email or password")
+
+  if (user.status === "blocked") {
+    throw new unauth("Your account is blocked. Contact admin.")
   }
 
-  const ispasswordCorrect = await user.comparePassword(password)
-if(!ispasswordCorrect){ 
-  throw new unauth("Invalid email or password")
+  const token = user.createJWT()
+
+  // ✅ This is what was missing
+  return res.status(200).json({
+    user: { name: user.name, role: user.role },
+    token
+  })
 }
-console.log(ispasswordCorrect)
-    const token = user.createJWT()
-    res.status(StatusCodes.OK).json({user:{name: user.name}, token})
-}
+
 
 
 module.exports ={

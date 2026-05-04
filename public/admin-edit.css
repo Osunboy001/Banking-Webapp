@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  height: 100vh;
+}
+
+/* FULL SCREEN PAGE */
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* TITLE */
+.title {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+/* MAIN CARD FULL WIDTH */
+.card {
+  flex: 1;
+  display: flex;
+  gap: 60px;
+ background-color: #d8dfe3;
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  align-items: center;
+}
+
+/* PROFILE SECTION */
+.profile {
+  width: 300px;
+  text-align: center;
+}
+
+.profile img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid #1e6fff;
+  object-fit: cover;
+}
+
+.label {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* FORM SECTION */
+.form {
+  flex: 1;
+}
+
+input {
+  width: 100%;
+  padding: 18px;
+  margin-bottom: 20px;
+  border: 2px solid #e5e5e5;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+}
+
+input:focus {
+  border-color: #1e6fff;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 18px;
+  background: #1e6fff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #0f57d6;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .profile {
+    width: 100%;
+  }
+
+  .profile img {
+    width: 150px;
+    height: 150px;
+  }
+}

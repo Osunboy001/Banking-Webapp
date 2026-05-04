@@ -1,7 +1,7 @@
 // ===================== BASE URL =====================
 const BASE_URL = "http://localhost:3000/api/v1"
 
-// ===================== SIDEBAR =====================
+//  SIDEBAR
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar')
   const overlay = document.getElementById('overlay')
@@ -17,7 +17,7 @@ document.addEventListener('keydown', (e) => {
   }
 })
 
-// ===================== SEARCH =====================
+// SEARCH 
 function searchUser() {
   let input = document.getElementById("search").value.toLowerCase()
   let rows = document.querySelectorAll("#users tr")
@@ -30,7 +30,7 @@ function searchUser() {
   })
 }
 
-// ===================== LOAD USERS =====================
+// LOAD USERS =
 async function loadUsers() {
   try {
     const token = localStorage.getItem("token")
@@ -46,27 +46,31 @@ async function loadUsers() {
     const tbody = document.getElementById("users")
     tbody.innerHTML = ""
 
-    data.users.forEach(user => {
-      tbody.innerHTML += `
-        <tr>
-          <td>${user.name}</td>
-          <td>${user.accountnumber}</td>
-          <td>₦${user.balance.toLocaleString()}</td>
-          <td>
-            <span class="status ${user.status === "blocked" ? "blocked" : "active"}">
-              ${user.status || "active"}
-            </span>
-          </td>
-          <td>
-            <button class="btn view">View</button>
-            <button class="btn ${user.status === "blocked" ? "unblock" : "block"}"
-              onclick="blockUser('${user._id}')">
-              ${user.status === "blocked" ? "Unblock" : "Block"}
-            </button>
-          </td>
-        </tr>
-      `
-    })
+   data.users.forEach(user => {
+  tbody.innerHTML += `
+    <tr>
+      <td>
+        <a href="admin-edit.html?id=${user._id}" style=" olor:black;   cursor:pointer; text-decoration:none; color:black">
+          ${user.name}
+        </a>
+      </td>
+      <td>${user.accountnumber}</td>
+      <td>₦${user.balance.toLocaleString()}</td>
+      <td>
+        <span class="status ${user.status === "blocked" ? "blocked" : "active"}">
+          ${user.status || "active"}
+        </span>
+      </td>
+      <td>
+        <button class="btn view">View</button>
+        <button class="btn ${user.status === "blocked" ? "unblock" : "block"}"
+          onclick="blockUser('${user._id}')">
+          ${user.status === "blocked" ? "Unblock" : "Block"}
+        </button>
+      </td>
+    </tr>
+  `
+})
 
   } catch (err) {
     console.log("LOAD USERS ERROR:", err)
@@ -85,7 +89,7 @@ async function loadStats() {
     })
 
     const data = await res.json()
-
+console.log("STATS:", data)
     document.querySelectorAll(".card p")[0].textContent = data.totalUsers
     document.querySelectorAll(".card p")[1].textContent = `₦${data.totalBalance.toLocaleString()}`
     document.querySelectorAll(".card p")[2].textContent = data.activeUsers

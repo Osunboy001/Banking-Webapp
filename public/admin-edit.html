@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit User</title>
+  <link rel="stylesheet" href="admin-edit.css">
+</head>
+
+<body>
+
+  <div class="page">
+
+    <h2 class="title">Edit User Profile</h2>
+
+    <div class="card">
+
+      <!-- PROFILE IMAGE -->
+      <div class="profile">
+        <img src="https://via.placeholder.com/150" id="profileImg">
+        <p class="label">Profile Picture</p>
+      </div>
+
+      <!-- FORM -->
+      <div class="form">
+        <input id="name" placeholder="Full Name">
+        <input id="email" placeholder="Email Address">
+        <input id="account" placeholder="Account Number" disabled>
+
+        <button onclick="updateUser()">Save Changes</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="admin-edit.js"></script>
+</body>
+</html>

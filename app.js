@@ -12,15 +12,17 @@ const {myuser} = require('./data')
 app.use((req, res, next) => {
   next()
 })
-
+const home = require('./router/home')
+const adminEdit = require('./router/admin-edit')
 const users =  require('./router/users')
 const auth = require('./router/auth')
 const adminDashboard = require('./router/admindashboard')
 app.use('/api/v1/users', users)
 app.use('/api/v1/auth', auth )
 app.use('/api/v1/admin', adminDashboard)
+app.use('/api/v1/admin', adminEdit)
 
-const home = require('./router/home')
+
 app.use('/api/v1', home)
    
 // app.post('/users', (req, res) => {
