@@ -1,105 +1,92 @@
 const BASE_URL = window.location.origin + '/api/v1'
 
-// TYPEWRITER ANIMATION
-const typewriterTexts = [
-    "Secure payment processing with 256-bit encryption",
-    "Your money is protected 24/7",
-    "Instant deposit - Money arrives in seconds",
-    "No hidden fees - Complete transparency",
-    "Bank-grade security for peace of mind"
-]
+// ── HELPERS ──
+function formatNaira(amount) {
+    const n = Number(amount) || 0
+    return '₦' + n.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
 
-let currentTextIndex = 0
-let currentCharIndex = 0
-let isTyping = true
+// ── TODAY'S DATE ──
+function setToday() {
+    const el = document.getElementById('todayDate')
+    if (!el) return
+    const now = new Date()
+    el.textContent = now.toLocaleDateString('en-NG', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    })
+}
 
-function typewriter() {
-    const typewriterEl = document.getElementById('typewriterText')
-    const currentText = typewriterTexts[currentTextIndex]
+// ── BALANCE + EYE TOGGLE ──
+let currentBalance = 0
+let balanceHidden = false
 
-    if (isTyping) {
-        if (currentCharIndex < currentText.length) {
-            typewriterEl.textContent += currentText[currentCharIndex]
-            currentCharIndex++
-            setTimeout(typewriter, 50)
-        } else {
-            // Text complete, wait before moving to next
-            isTyping = false
-            setTimeout(() => {
-                currentTextIndex = (currentTextIndex + 1) % typewriterTexts.length
-                currentCharIndex = 0
-                typewriterEl.textContent = ''
-                isTyping = true
-                setTimeout(typewriter, 500)
-            }, 3000)
-        }
+function renderBalance() {
+    const el = document.getElementById('balanceAmount')
+    if (!el) return
+    if (balanceHidden) {
+        el.textContent = '₦••••••'
+        el.classList.add('is-hidden')
+    } else {
+        el.textContent = formatNaira(currentBalance)
+        el.classList.remove('is-hidden')
     }
 }
 
-// Start typewriter
-typewriter()
+async function loadBalance() {
+    const el = document.getElementById('balanceAmount')
+    if (!el) return
+    try {
+        const res = await fetch(BASE_URL + '/dashboard', { credentials: 'include' })
+        if (!res.ok) throw new Error('Failed to load balance')
+        const data = await res.json()
+        currentBalance = data.balance || 0
+    } catch (err) {
+        currentBalance = 0
+    }
+    renderBalance()
+}
 
-// AMOUNT PRESETS
+// EYE TOGGLE
+const balanceEye = document.getElementById('balanceEye')
+if (balanceEye) {
+    balanceEye.addEventListener('click', () => {
+        balanceHidden = !balanceHidden
+        balanceEye.querySelector('i').className = balanceHidden ? 'fas fa-eye-slash' : 'fas fa-eye'
+        balanceEye.setAttribute('aria-label', balanceHidden ? 'Show balance' : 'Hide balance')
+        balanceEye.setAttribute('aria-pressed', String(balanceHidden))
+        renderBalance()
+    })
+}
+
+// ── AMOUNT PRESETS ──
 document.querySelectorAll('.preset-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault()
-        const amount = btn.dataset.amount
-        document.getElementById('amount').value = amount
-        
-        // Update active state
+        document.getElementById('amount').value = btn.dataset.amount
         document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'))
         btn.classList.add('active')
-        
-        // Update summary
         updateSummary()
     })
 })
 
-// AMOUNT INPUT CHANGE
+// ── AMOUNT INPUT CHANGE ──
 document.getElementById('amount').addEventListener('input', () => {
-    // Remove active state from presets
     document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'))
     updateSummary()
 })
 
-// PAYMENT METHOD CHANGE
-document.querySelectorAll('input[name="method"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-        document.querySelectorAll('.payment-option').forEach(opt => {
-            opt.classList.remove('selected')
-        })
-        radio.parentElement.classList.add('selected')
-    })
-})
-
-// UPDATE SUMMARY
+// ── UPDATE SUMMARY ──
 function updateSummary() {
     const amount = parseFloat(document.getElementById('amount').value) || 0
-    const summaryAmount = document.getElementById('summaryAmount')
-    const summaryTotal = document.getElementById('summaryTotal')
-
-    if (amount > 0) {
-        summaryAmount.textContent = '₦' + amount.toLocaleString('en-NG', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        })
-        summaryTotal.textContent = '₦' + amount.toLocaleString('en-NG', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        })
-    } else {
-        summaryAmount.textContent = '₦0.00'
-        summaryTotal.textContent = '₦0.00'
-    }
+    document.getElementById('summaryAmount').textContent = formatNaira(amount)
+    document.getElementById('summaryTotal').textContent = formatNaira(amount)
 }
 
-// FORM SUBMISSION
+// ── FORM SUBMISSION (Paystack) ──
 document.getElementById('depositForm').addEventListener('submit', async (e) => {
     e.preventDefault()
 
     const amount = parseFloat(document.getElementById('amount').value)
-    const description = document.getElementById('description').value
-    const resultDiv = document.getElementById('result')
     const btnText = document.getElementById('btnText')
     const loader = document.getElementById('loader')
 
@@ -109,30 +96,23 @@ document.getElementById('depositForm').addEventListener('submit', async (e) => {
         return
     }
 
-    // Show loading state
+    // Loading state
     btnText.style.display = 'none'
     loader.style.display = 'inline'
 
     try {
-        // Initialize payment
         const response = await fetch(`${BASE_URL}/deposit/initialize`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-            body: JSON.stringify({ 
-                amount: parseInt(amount),
-                description: description
-            })
+            body: JSON.stringify({ amount: parseInt(amount) })
         })
 
         const data = await response.json()
 
         if (!response.ok) {
             showResult(data.message || 'Payment initialization failed', 'error')
-            btnText.style.display = 'inline'
-            loader.style.display = 'none'
+            resetButton()
             return
         }
 
@@ -141,65 +121,30 @@ document.getElementById('depositForm').addEventListener('submit', async (e) => {
             window.location.href = data.data.authorization_url
         } else {
             showResult('Failed to get payment URL', 'error')
-            btnText.style.display = 'inline'
-            loader.style.display = 'none'
+            resetButton()
         }
-
     } catch (error) {
         showResult('Error: ' + error.message, 'error')
-        btnText.style.display = 'inline'
-        loader.style.display = 'none'
+        resetButton()
     }
 })
 
-// SHOW RESULT MESSAGE
+function resetButton() {
+    document.getElementById('btnText').style.display = 'inline'
+    document.getElementById('loader').style.display = 'none'
+}
+
+// ── RESULT MESSAGE ──
 function showResult(message, type) {
     const resultDiv = document.getElementById('result')
     resultDiv.textContent = message
     resultDiv.className = 'result-message ' + type
-    
-    // Auto hide after 5 seconds
     setTimeout(() => {
         resultDiv.classList.remove('success', 'error')
     }, 5000)
 }
 
-// SIDEBAR FUNCTIONALITY
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar')
-    const overlay = document.getElementById('overlay')
-    
-    if (sidebar && overlay) {
-        sidebar.classList.toggle('active')
-        overlay.classList.toggle('active')
-    }
-}
-
-// Close sidebar when clicking menu item (mobile)
-document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-            toggleSidebar()
-        }
-    })
-})
-
-// Close sidebar on Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const sidebar = document.getElementById('sidebar')
-        const overlay = document.getElementById('overlay')
-        if (sidebar && overlay) {
-            sidebar.classList.remove('active')
-            overlay.classList.remove('active')
-        }
-    }
-})
-
-// Initialize summary on page load
-
-
-
+// ── INIT ──
+setToday()
+loadBalance()
 updateSummary()
-
-
