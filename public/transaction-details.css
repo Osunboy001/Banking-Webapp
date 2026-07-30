@@ -7,7 +7,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #f5f7fb 0%, #e8f0f7 100%);
+  background: linear-gradient(135deg, #f7f5fb 0%, #eee8f7 100%);
   min-height: 100vh;
   padding: 20px;
   display: flex;
@@ -24,7 +24,7 @@ body {
 .receipt-header {
   text-align: center;
   padding: 30px 0;
-  background-color: rgb(45, 156, 219);
+  background-color: rgb(109, 45, 219);
   color: white;
   border-radius: 16px 16px 0 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -54,7 +54,7 @@ body {
 /* TRANSACTION TYPE */
 .transaction-type {
   display: inline-block;
-  background: #10b981;
+  background: #4e10b9;
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
@@ -93,7 +93,7 @@ body {
 /* DIVIDER */
 .divider {
   height: 1px;
-  background: #e3eaf2;
+  background: #e9e3f2;
   margin: 20px 0;
 }
 
@@ -116,14 +116,14 @@ body {
 }
 
 .detail-value {
-  color: #1a202c;
+  color: #211a2c;
   font-weight: 600;
   text-align: right;
   word-break: break-word;
 }
 
 .status-success {
-  color: #10b981;
+  color: #4e10b9;
   font-weight: 700;
 }
 
@@ -136,7 +136,7 @@ body {
   
   margin: 20px 0;
   padding: 20px;
-  background: #f8fbff;
+  background: #fbf8ff;
   border-radius: 12px;
 }
 
@@ -157,7 +157,7 @@ body {
 .party-name {
   font-size: 17px;
   font-weight: 700;
-  color: #1a202c;
+  color: #211a2c;
   margin-bottom: 4px;
 }
 
@@ -169,13 +169,13 @@ font-family: Arial, Helvetica, sans-serif;
 
 .arrow {
   font-size: 20px;
-  color: rgb(45, 156, 219);
+  color: rgb(109, 45, 219);
   font-weight: bold;
 }
 
 /* INFO SECTION */
 .info-section {
-  background: #f8fbff;
+  background: #fbf8ff;
   padding: 15px;
   border-radius: 12px;
   font-size: 13px;
@@ -189,7 +189,7 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 .info-row span:last-child {
-  color: #1a202c;
+  color: #211a2c;
   font-weight: 600;
   word-break: break-word;
   text-align: right;
@@ -216,24 +216,24 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn-print {
-  background: rgb(45, 156, 219);
+  background: rgb(109, 45, 219);
   color: white;
-  box-shadow: 0 4px 12px rgba(45, 156, 219, 0.3);
+  box-shadow: 0 4px 12px rgba(109, 45, 219, 0.3);
 }
 
 .btn-print:hover {
-  background: rgb(29, 124, 174);
+  background: rgb(82, 29, 174);
   transform: translateY(-2px);
 }
 
 .btn-share {
-  background: rgb(10, 124, 78);
+  background: rgb(52, 10, 124);
   color: white;
-  box-shadow: 0 4px 12px rgba(10, 124, 78, 0.3);
+  box-shadow: 0 4px 12px rgba(52, 10, 124, 0.3);
 }
 
 .btn-share:hover {
-  background: rgb(7, 90, 56);
+  background: rgb(37, 7, 90);
   transform: translateY(-2px);
 }
 
