@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit User - NairaBank Admin</title>
   <link rel="stylesheet" href="admin-edit.css">
+  <link rel="stylesheet" href="/main-sidebar.css">
 </head>
 
 <body>
@@ -73,13 +74,7 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script>
-    fetch('main-sidebar.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("sidebar-container").innerHTML = data;
-      });
-  </script>
+  <script src="/sidebar.js"></script>
 
   <script src="admin-edit.js"></script>
 </body>
