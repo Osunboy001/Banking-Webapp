@@ -22,6 +22,27 @@ const createPin = async (req, res) => {
   }
 }
 
+const changePin = async (req, res) => {
+  try {
+    const { password, newPin } = req.body
+    if (!password || !newPin) return res.status(400).json({ message: "Password and new PIN are required" })
+
+    const user = await myUser.findById(req.user.userId)
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    const isMatch = await user.comparePassword(password)
+    if (!isMatch) return res.status(400).json({ message: "Incorrect password" })
+
+    const salt = await bcrypt.genSalt(10)
+    user.pin = await bcrypt.hash(newPin, salt)
+    await user.save()
+
+    res.status(200).json({ success: true, message: "PIN updated successfully" })
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+}
+
 const checkPin = async (req, res) => {
   try {
     const user = await myUser.findById(req.user.userId).select("pin")
@@ -203,4 +224,4 @@ const getSingleHistory = async (req,res) => {
 
 
 
-module.exports = { getAccountName, transfer, checkPin, createPin ,getTransactionHistory,getSingleHistory}
+module.exports = { getAccountName, transfer, checkPin, createPin, changePin ,getTransactionHistory,getSingleHistory}

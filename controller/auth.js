@@ -1,51 +1,56 @@
 const { StatusCodes } = require("http-status-codes")
 const User = require('../model/user')
+const { badRequest, unAuntentication, forbidden } = require('../err')
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body
 
     if (!name || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" })
+      throw new badRequest("All fields are required")
     }
 
-    const user = await User.create({
+    await User.create({
       name,
       email,
       password,
       role: "user",
-      isVerified: true  
+      isVerified: true
     })
 
-    return res.status(201).json({
-      message: "Account created! You can now login."
+    return res.status(StatusCodes.CREATED).json({
+      msg: "Account created! You can now login."
     })
 
   } catch (err) {
-    return res.status(500).json({ message: err.message })
+    // Duplicate key and Mongoose validation are handled centrally in
+    // middleware/err-handler.js, so just hand off.
+    next(err)
   }
 }
 
-const signin = async (req, res) => {
+const signin = async (req, res, next) => {
   try {
     const { email, password } = req.body
 
     if (!email || !password) {
-      return res.status(400).json({ message: "All fields are required" })
+      throw new badRequest("All fields are required")
     }
 
     const user = await User.findOne({ email })
+    // Same message whether the email is unknown or the password is wrong, so we
+    // don't reveal which emails have accounts (user enumeration).
     if (!user) {
-      return res.status(401).json({ message: "User does not exist" })
+      throw new unAuntentication("Invalid email or password")
     }
 
     const isPasswordCorrect = await user.comparePassword(password)
     if (!isPasswordCorrect) {
-      return res.status(401).json({ message: "Invalid email or password" })
+      throw new unAuntentication("Invalid email or password")
     }
 
     if (user.status === "blocked") {
-      return res.status(403).json({ message: "Your account is blocked. Contact admin." })
+      throw new forbidden("Your account is blocked. Contact admin.")
     }
 
     const token = user.createJWT()
@@ -57,19 +62,18 @@ const signin = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000
     })
 
-    return res.status(200).json({
+    return res.status(StatusCodes.OK).json({
       user: { name: user.name, role: user.role }
     })
 
   } catch (err) {
-    return res.status(500).json({ message: err.message })
+    next(err)
   }
 }
 
 const logout = (req, res) => {
   res.clearCookie('token')
-  return res.status(200).json({ message: "Logged out successfully" })
+  return res.status(StatusCodes.OK).json({ msg: "Logged out successfully" })
 }
 
 module.exports = { signin, signup, logout }
-
