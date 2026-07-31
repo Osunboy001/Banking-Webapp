@@ -24,6 +24,8 @@ const auth = require('./router/auth')
 const adminDashboard = require('./router/admindashboard')
 const transaction = require('./router/transaction')
 const deposit = require('./router/payment-deposit')
+const notFoundMiddleware = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/err-handler')
 
 app.use('/api/v1/users', users)
 app.use('/api/v1/auth', auth)
@@ -32,6 +34,11 @@ app.use('/api/v1/admin', adminEdit)
 app.use('/api/v1/transactions', transaction)
 app.use('/api/v1/deposit', deposit)
 app.use('/api/v1/', home)
+
+// Must come after all routes: unknown routes -> 404, thrown errors -> handler
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
+
 const port = process.env.PORT || 3000;
 
 const start = async () => {

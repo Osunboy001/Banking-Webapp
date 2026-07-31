@@ -28,13 +28,13 @@ body {
 .bank-header {
   text-align: center;
   margin-bottom: 30px;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #9666ea;
   padding-bottom: 20px;
 }
 
 .bank-header h1 {
   font-size: 42px;
-  color: #667eea;
+  color: #9666ea;
   margin-bottom: 5px;
   font-weight: 700;
 }
@@ -67,8 +67,8 @@ body {
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #9666ea;
+  box-shadow: 0 0 0 3px rgba(150, 102, 234, 0.1);
 }
 
 .form-group input::placeholder {
@@ -76,7 +76,7 @@ body {
 }
 
 #currentBalance {
-  background:rgba(0, 0, 255, 0.714);
+  background:rgba(94, 0, 255, 0.714);
   color: white;
   padding: 20px;
   border-radius: 8px;
@@ -94,7 +94,7 @@ button {
   width: 100%;
   color: white;
   padding: 16px;
-  background: rgba(0, 0, 255, 0.738);
+  background: rgba(94, 0, 255, 0.738);
   border: none;
   border-radius: 8px;
   font-size: 18px;
@@ -107,7 +107,7 @@ button {
 
 :hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 20px rgba(150, 102, 234, 0.4);
 }
 
 button:active {
@@ -133,9 +133,9 @@ button:active {
 }
 
 #result.success {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  background-color: #ddd4ed;
+  color: #2d1557;
+  border: 1px solid #d0c3e6;
 }
 
 #result.error {
@@ -150,7 +150,7 @@ button:active {
 }
 
 .back-button a {
-  color: #667eea;
+  color: #9666ea;
   text-decoration: none;
   font-weight: 700;
   font-size: 16px;
