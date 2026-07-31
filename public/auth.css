@@ -7,21 +7,29 @@
 }
 
 :root {
-  --primary: #2d9cdb;
-  --primary-dark: #1a7db8;
-  --bg: #f4f7fb;
+  --primary: #7C3AED;
+  --primary-dark: #6D28D9;
+  --pink: #DB2777;
+  --pink-dark: #BE185D;
+  --brand-gradient: linear-gradient(120deg, #7C3AED 0%, #9333EA 45%, #DB2777 100%);
+  --bg: #f7f4fb;
   --card: #ffffff;
-  --text: #1a202c;
-  --muted: #718096;
-  --border: #e3eaf2;
+  --text: #211a2c;
+  --muted: #7f7196;
+  --border: #e9e3f2;
   --danger: #f56565;
-  --success: #22c55e;
+  --success: #7C3AED;
   --shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
 body {
   background: white;
   color: var(--text);
+}
+
+
+.adeco {
+  color: black;
 }
 
     .themeSwitch {
@@ -48,13 +56,13 @@ body {
     .themeSwitch svg:last-of-type { display: none; }
     .darkmode {
   /* flip the theme variables so everything using them goes dark */
-  --bg: #0f141a;
-  --card: #1b232d;
-  --text: #f4f7fb;
-  --muted: #9aa7b5;
-  --border: #2a333f;
+  --bg: #130f1a;
+  --card: #221b2d;
+  --text: #f7f4fb;
+  --muted: #a49ab5;
+  --border: #322a3f;
 
-  background: #0f141a;
+  background: #130f1a;
   color: var(--text);
 }
 
@@ -68,6 +76,9 @@ body {
   border-color: var(--border);
   color: var(--text);
 }
+.darkmode  .adeco {
+  color: white;
+}
 
 .darkmode .flow-card { border: 1px solid var(--border); }
 
@@ -75,12 +86,12 @@ body {
 .darkmode input,
 .darkmode textarea,
 .darkmode select {
-  background: #141b22;
+  background: #191422;
   border-color: var(--border);
   color: var(--text);
 }
 .darkmode input:focus {
-  background: #1b232d;
+  background: #221b2d;
 }
 
 /* muted text */
@@ -109,7 +120,7 @@ body {
   border-color: var(--border);
 }
 .darkmode .icon-btn:hover {
-  background: #243140;
+  background: #2e2440;
   border-color: var(--primary);
 }
 
@@ -138,23 +149,25 @@ body {
 
 /* status badge — keep it readable on dark */
 .darkmode .dateStatus .status {
-  color: #8ef0a8;
-  background-color: rgba(34, 197, 94, 0.18);
+  color: #b28ef0;
+  background-color: rgba(94, 34, 197, 0.18);
 }
 
 /* dropdown gradient card */
 .darkmode .dropdown-card {
-  background: linear-gradient(135deg, rgba(45,156,219,0.18), rgba(26,125,184,0.08));
+  background: linear-gradient(135deg, rgba(109, 45, 219, 0.18), rgba(84, 26, 184, 0.08));
 }
 .darkmode .dropdown-divider { background: var(--border); }
-.darkmode .dropdown-item:hover { background: #243140; }
+.darkmode .dropdown-item:hover { background: #2e2440; }
 
 /* .add button is white-on-white in dark */
 .darkmode .add {
   background-color: var(--card);
-  color: var(--primary);
+  color: white;
 }
-
+.darkmode .adeco{
+  color: black !important;
+}
 .hidden {
   display: none !important;
 }
@@ -176,7 +189,7 @@ body {
 }
 /*  LEFT PANEL UPGRADE  */
 .left-panel {
-  background: #0c6ca8 ;
+  background: #450ca8 ;
   background-size: 200% 200%;
   animation: bgShift 8s ease infinite;
   padding: 60px 52px;
@@ -256,8 +269,8 @@ body {
   height: 7px;
   border-radius: 50%;
   color: green;
-  background: #7ee8a2;
-  box-shadow: 0 0 8px #7ee8a2;
+  background: #a57ee8;
+  box-shadow: 0 0 8px #a57ee8;
   flex-shrink: 0;
   display: inline-block;
 }
@@ -353,7 +366,7 @@ input {
   margin-bottom: 14px;
   border-radius: 10px;
   border: 1.5px solid var(--border);
-  background: #f8fbff;
+  background: #fbf8ff;
   font-size: 15px;
   outline: none;
   transition: 0.2s;
@@ -362,7 +375,7 @@ input {
 input:focus {
   border-color: var(--primary);
   background: white;
-  box-shadow: 0 0 0 3px rgba(45,156,219,0.12);
+  box-shadow: 0 0 0 3px rgba(109, 45, 219, 0.12);
 }
 
 /*  BUTTONS  */
@@ -371,19 +384,15 @@ input:focus {
   padding: 13px;
   border: none;
   border-radius: 10px;
-  background: var(--primary);
+  background: #6D28D9 ;
   color: white;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
   transition: 0.2s;
-  box-shadow: 0 4px 14px rgba(45,156,219,0.3);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
 }
 
-.login-button:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
-}
 
 /* VERIFY EMAIL BUTTON */
 .verify-button {
@@ -458,7 +467,7 @@ input:focus {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 12px rgba(16, 40, 80, 0.04);
+  box-shadow: 0 1px 12px rgba(39, 16, 80, 0.04);
 }
 
 /* LEFT: greeting */
@@ -500,7 +509,7 @@ input:focus {
   transition: background 0.18s ease, border-color 0.18s ease;
 }
 .icon-btn:hover {
-  background: #eef4fb;
+  background: #f3eefb;
   border-color: var(--primary);
 }
 .icon-badge {
@@ -526,13 +535,21 @@ input:focus {
   justify-content: center;
   font-weight: 700;
   font-size: 16px;
-  box-shadow: 0 3px 10px rgba(45,156,219,0.3);
+  box-shadow: 0 3px 10px rgba(109, 45, 219, 0.3);
   flex-shrink: 0;
 }
 .avatar-lg {
   width: 48px;
   height: 48px;
   font-size: 19px;
+}
+
+/* When the avatar holds an uploaded picture, let it fill the circle */
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Profile trigger */
@@ -586,7 +603,7 @@ input:focus {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  box-shadow: 0 18px 48px rgba(16, 40, 80, 0.16);
+  box-shadow: 0 18px 48px rgba(39, 16, 80, 0.16);
   padding: 8px;
   opacity: 0;
   visibility: hidden;
@@ -606,7 +623,7 @@ input:focus {
   gap: 12px;
   padding: 12px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(45,156,219,0.08), rgba(26,125,184,0.04));
+  background: linear-gradient(135deg, rgba(109, 45, 219, 0.08), rgba(84, 26, 184, 0.04));
 }
 .dropdown-card-info {
   overflow: hidden;
@@ -693,9 +710,9 @@ input:focus {
   overflow: hidden;
   padding: 26px 28px;
   border-radius: 22px;
- background-color:#2d9cdb ;
+ background-color:#6d2ddb ;
   color: white;
-  box-shadow: 0 18px 40px rgba(45,156,219,0.35);
+  box-shadow: 0 18px 40px rgba(109, 45, 219, 0.35);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -907,11 +924,11 @@ input:focus {
 }
 
 .donut-track {
-  stroke: #eef0f2;
+  stroke: #efeef2;
 }
 
 .donut-received {
-  stroke: #16a34a;
+  stroke: #4a16a3;
   stroke-dasharray: 0 502.65;
   transition: stroke-dasharray 0.6s ease;
 }
@@ -934,7 +951,7 @@ input:focus {
 .donut-pct {
   font-size: 28px;
   font-weight: 800;
-  color: #16a34a;
+  color: #4a16a3;
   line-height: 1;
 }
 
@@ -971,7 +988,7 @@ input:focus {
 
 .donut-stat-val.received { 
   font-size: 29px;
-  color: #16a34a; }
+  color: #4a16a3; }
 .donut-stat-val.sent     { 
   
   font-size: 29px;
@@ -980,7 +997,7 @@ input:focus {
 .donut-stat-divider {
   width: 70px;
   height: 1px;
-  background: #eef0f2;
+  background: #efeef2;
   margin: 9px 0;
 }
 
@@ -1018,7 +1035,7 @@ input:focus {
   display: inline-block;
 }
 
-.dot-received { background: #16a34a; }
+.dot-received { background: #4a16a3; }
 .dot-sent     { background: #ef4444; }
 
 @media (max-width: 600px) {
@@ -1169,12 +1186,12 @@ justify-content: space-between;
   font-weight: 500;
 position: abe;
   text-decoration: none;
-  border: 8px, solid, color(#2d9cdb) ;
+  border: 8px, solid, color(#6d2ddb) ;
   border-radius: 7px;
   color: white;
  right: 0;
  bottom: 185px;
-background-color:#2d9cdb ;
+background-color:#6d2ddb ;
 
  } 
 .admoney {
@@ -1197,21 +1214,21 @@ background-color:#2d9cdb ;
 
 .add {
   background-color: white;
-  color: #2d9cdb;
-  border: 2px solid #2d9cdb;
+  color: #6d2ddb;
+  border: 2px solid #6d2ddb;
 }
 
 .trans {
-  background-color: #2d9cdb;
+  background-color: #6d2ddb;
   color: white;
-  border: 2px solid #2d9cdb;
+  border: 2px solid #6d2ddb;
 }
 
 
 
 .dateStatus .status {
-  color: rgb(6, 146, 6);
-  background-color: rgb(193, 250, 193);
+  color: rgb(57, 6, 146);
+  background-color: rgb(214, 193, 250);
 
 
 
@@ -1271,6 +1288,83 @@ background-color:#2d9cdb ;
   }
 }
 
+/* ===== TABLET & DOWN: stack the dashboard hero + flow row ===== */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    margin: 16px;
+  }
+  /* balance sits full-width on top, the two summary cards share a row below */
+  .stat-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .stat-card { flex: 1; }
+
+  .history-row {
+    flex-direction: column;
+    margin: 16px;
+  }
+  .section { width: 100%; }
+}
+
+/* ===== PHONES: tighten summary cards so amounts don't overflow ===== */
+@media (max-width: 600px) {
+  .balance { padding: 22px 20px; }
+
+  .balanceview button { font-size: 30px; }
+
+  .stat-card {
+    padding: 18px 16px;
+    gap: 12px;
+    border-radius: 18px;
+  }
+  .stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+  .stat-info h2 { font-size: 22px; }
+  .stat-info small { font-size: 11px; }
+  .stat-trend { font-size: 11px; flex-wrap: wrap; }
+  .stat-trend span { padding: 4px 9px; font-size: 11px; }
+}
+
+/* ===== SMALL PHONES: stack the two summary cards ===== */
+@media (max-width: 400px) {
+  .balance h1 { font-size: 27px; }
+  .stat-grid { flex-direction: column; }
+  .stat-info h2 { font-size: 26px; }
+}
+
+/* ===== VERY SMALL PHONES (~300–340px, e.g. Galaxy Fold) ===== */
+@media (max-width: 340px) {
+  .hero, .history-row { margin: 12px; }
+
+  .balance { padding: 18px 16px; }
+  .balance h1 { font-size: 22px; }
+  .balanceview button { font-size: 26px; }
+
+  /* Add Money / Transfer buttons inside the balance card */
+  .admoney { gap: 8px; }
+  .add, .trans { padding: 7px 12px; font-size: 11px; }
+
+  .stat-card { padding: 15px 13px; }
+  .stat-info h2 { font-size: 22px; }
+  .stat-icon { width: 40px; height: 40px; border-radius: 12px; }
+
+  .topbar { padding: 0 10px; }
+  .topbar-title { font-size: 15px; }
+
+  /* docked bottom action bar — keep 4 icons from crowding */
+  .actions { gap: 4px; padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); }
+  .actions .action { padding: 9px 3px; }
+  .actions .action svg { width: 22px; height: 22px; }
+  .actions .action span { font-size: 9px; }
+}
+
 #loginResult,
 #signupResult {
   display: none;
@@ -1293,9 +1387,9 @@ background-color:#2d9cdb ;
 #loginResult.show.success,
 #signupResult.show.success {
   display: block;
-  background: #e6f7f0;
-  color: #0a7c4e;
-  border: 1px solid #9fe1cb;
+  background: #ece6f7;
+  color: #340a7c;
+  border: 1px solid #b79fe1;
 }
 
 
@@ -1557,7 +1651,7 @@ background-color:#2d9cdb ;
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 10px;
-  color: rgb(45, 156, 219);
+  color: rgb(109, 45, 219);
 }
 
 .modal-step p {
@@ -1577,14 +1671,14 @@ background-color:#2d9cdb ;
 
 .modal-step input:focus {
   outline: none;
-  border-color: rgb(45, 156, 219);
-  box-shadow: 0 0 5px rgba(45, 156, 219, 0.3);
+  border-color: rgb(109, 45, 219);
+  box-shadow: 0 0 5px rgba(109, 45, 219, 0.3);
 }
 
 .modal-step button {
   width: 100%;
   padding: 12px;
-  background: rgb(45, 156, 219);
+  background: rgb(109, 45, 219);
   color: white;
   border: none;
   border-radius: 6px;
@@ -1608,12 +1702,12 @@ background-color:#2d9cdb ;
   padding:14px;
   border:none;
   border-radius:12px;
-  background:linear-gradient(135deg,#2d9cdb,#1f6fd6);
+  background:linear-gradient(135deg,#6d2ddb,#621fd6);
   color:#fff;
   font-size:15px;
   font-weight:600;
   cursor:pointer;
-  box-shadow:0 8px 18px rgba(45,156,219,.3);transition:transform .15s,box-shadow .15s;
+  box-shadow:0 8px 18px rgba(109, 45, 219, .3);transition:transform .15s,box-shadow .15s;
 
 }
 .messagep {
@@ -1644,7 +1738,7 @@ background-color:#2d9cdb ;
 #emailMessage.success,
 #otpMessage.success,
 #passwordMessage.success {
-  color: #27ae60;
+  color: #5927ae;
 }
 
 
@@ -1671,7 +1765,7 @@ background-color:#2d9cdb ;
   justify-content: center;
   border-radius: 50%;
   margin-bottom: 18px;
-  background: #eafaf0;
+  background: #f0eafa;
   
 }
 
@@ -1686,14 +1780,14 @@ background-color:#2d9cdb ;
 }
 
 .empty-state--filter .empty-state__icon {
-  background: #eef0f2;
+  background: #efeef2;
   
 }
 
  h3 .empty-state__title {
   font-size: 232px;
   font-weight: 600;
-  color: #111827;
+  color: #191127;
   margin: 0 0 6px;
 }
 
@@ -1704,3 +1798,9 @@ background-color:#2d9cdb ;
   line-height: 1.5;
   margin: 0;
 }
+
+
+
+
+
+

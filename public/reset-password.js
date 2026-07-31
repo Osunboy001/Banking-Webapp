@@ -1,5 +1,4 @@
-const BASE_URL = "http://localhost:3000/api/v1";
-
+const BASE_URL = window.location.origin + '/api/v1'
 // Get token from URL
 const params = new URLSearchParams(window.location.search);
 const token = params.get("token");
@@ -55,6 +54,8 @@ async function resetPassword(e) {
     });
 
     const data = await res.json();
+    console.log('this is the data:', data)
+    console.log('response is here:',  res)
 
     if (!res.ok) {
       messageDiv.textContent = data.message || "Error updating password";

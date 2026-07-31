@@ -30,9 +30,9 @@
 
 .filter-btn {
   padding: 10px 16px;
-  border: 2px solid rgb(45, 156, 219);
+  border: 2px solid rgb(109, 45, 219);
   background: white;
-  color: rgb(45, 156, 219);
+  color: rgb(109, 45, 219);
   border-radius: 20px;
   font-weight: 600;
   font-size: 13px;
@@ -41,13 +41,13 @@
 }
 
 .filter-btn:hover {
-  background: rgb(45, 156, 219);
+  background: rgb(109, 45, 219);
   color: white;
   transform: translateY(-2px);
 }
 
 .filter-btn.active {
-  background: rgb(45, 156, 219);
+  background: rgb(109, 45, 219);
   color: white;
 
 }
@@ -84,7 +84,7 @@
 .toAmount h3 {
   font-size: 20px;
   font-weight: 700;
-  color: rgb(45, 156, 219);
+  color: rgb(109, 45, 219);
   margin: 0;
   white-space: nowrap;
 }
@@ -93,7 +93,7 @@
 .view {
   display: inline-block;
   padding: 6px 12px;
-  background: rgb(45, 156, 219);
+  background: rgb(109, 45, 219);
   color: white;
   text-decoration: none;
   border-radius: 6px;
@@ -106,9 +106,9 @@
 }
 
 .view:hover {
-  background: rgb(29, 124, 174);
+  background: rgb(82, 29, 174);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(45, 156, 219, 0.3);
+  box-shadow: 0 4px 8px rgba(109, 45, 219, 0.3);
 }
 
 /* DATE & STATUS */
@@ -125,8 +125,8 @@
 }
 
 .dateStatus .status {
-  background: rgb(193, 250, 193);
-  color: rgb(6, 146, 6);
+  background: rgb(214, 193, 250);
+  color: rgb(57, 6, 146);
   padding: 4px 10px;
   border-radius: 4px;
   font-weight: 600;
@@ -201,11 +201,11 @@ hr {
 }
 
 .donut-track {
-  stroke: #eef0f2;
+  stroke: #efeef2;
 }
 
 .donut-received {
-  stroke: #16a34a;
+  stroke: #4a16a3;
   stroke-dasharray: 0 502.65;
   transition: stroke-dasharray 0.6s ease;
 }
@@ -228,7 +228,7 @@ hr {
 .donut-pct {
   font-size: 34px;
   font-weight: 800;
-  color: #16a34a;
+  color: #4a16a3;
   line-height: 1;
 }
 
@@ -258,6 +258,7 @@ hr {
 }
 
 .donut-stat-val {
+  
   font-size: 27px;
   font-weight: 800;
   line-height: 1;
@@ -265,16 +266,16 @@ hr {
 
 .donut-stat-val.received { 
   font-size: 29px;
-  color: #16a34a; }
+  color: black; }
 .donut-stat-val.sent     { 
   
   font-size: 29px;
-  color: #ef4444; }
+  color: black; }
 
 .donut-stat-divider {
   width: 80px;
   height: 1px;
-  background: #eef0f2;
+  background: #efeef2;
   margin: 11px 0;
 }
 
@@ -305,7 +306,7 @@ hr {
 .legend-val {
   font-size: 18px;
   font-weight: 700;
-  color: #222;
+  color: white;
 }
 
 .insights-title {
@@ -319,7 +320,7 @@ hr {
   display: inline-block;
 }
 
-.dot-received { background: #16a34a; 
+.dot-received { background: #4a16a3; 
 }
 .dot-sent     { background: #ef4444; }
 
@@ -400,7 +401,7 @@ hr {
   justify-content: center;
   border-radius: 50%;
   margin-bottom: 18px;
-  background: #eafaf0;
+  background: #f0eafa;
   
 }
 
@@ -415,14 +416,14 @@ hr {
 }
 
 .empty-state--filter .empty-state__icon {
-  background: #eef0f2;
+  background: #efeef2;
   
 }
 
  h3 .empty-state__title {
   font-size: 232px;
   font-weight: 600;
-  color: #111827;
+  color: #191127;
   margin: 0 0 6px;
 }
 
@@ -432,4 +433,53 @@ hr {
   max-width: 320px;
   line-height: 1.5;
   margin: 0;
+}
+
+
+/* ===== FULL DARK MODE OVERRIDES ===== */
+
+body.darkmode .section,
+body.darkmode .insights-card,
+body.darkmode .filter-section,
+body.darkmode .history-grid,
+body.darkmode .toAmount,
+body.darkmode .layout,
+body.darkmode .main-content {
+  background: #201a2a !important;
+  color: #e7e5eb !important;
+}
+
+/* cards + containers */
+body.darkmode .section {
+  border-color: #322a41;
+}
+
+/* sticky filter fix */
+body.darkmode .filter-section {
+  background: #110f15 !important;
+}
+
+/* text colors */
+body.darkmode h1,
+body.darkmode h2,
+body.darkmode h3,
+body.darkmode h5,
+body.darkmode p {
+  color: #e7e5eb !important;
+}
+
+/* borders */
+body.darkmode hr {
+  border-color: #322a41;
+}
+
+/* buttons */
+body.darkmode .filter-btn {
+  background: #201a2a;
+  color: #e7e5eb;
+  border-color: #6d2ddb;
+}
+body.darkmode .donut-stat-val {
+  color: white;
+
 }

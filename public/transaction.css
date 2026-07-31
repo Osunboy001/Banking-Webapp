@@ -3,22 +3,22 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* brand */
-  --accent: green;
-  --accent-700: green;
-  --accent-soft: #eafaf2;
-  --accent-ring: green;
+  /* brand — NairaBank #7c3aed */
+  --accent: #6d2ddb;
+  --accent-700: #541ab8;
+  --accent-soft: #f1eafc;
+  --accent-ring: rgba(109, 45, 219, 0.18);
 
   /* surfaces */
-  --ink: #0c1f17;          /* deep solid balance bar */
-  --bg: #f4f6f5;
+  --ink: #1c0f33;          /* deep solid balance bar */
+  --bg: #f7f4fb;
   --card: #ffffff;
-  --surface: #f7f9f8;      /* subtle inset panels */
+  --surface: #f9f7fd;      /* subtle inset panels */
 
   /* text */
-  --text: #0f172a;
-  --text2: #475569;
-  --text3: #94a3b8;
+  --text: #190f2a;
+  --text2: #534769;
+  --text3: #a194b8;
 
   /* states */
   --danger: #dc2626;
@@ -27,9 +27,9 @@
   --warn-bg: #fffbeb;
   --warn-text: #b45309;
   --warn-border: #fde68a;
-  --info-bg: #eff6ff;
-  --info-text: #1d4ed8;
-  --info-border: #bfdbfe;
+  --info-bg: #f5efff;
+  --info-text: #621dd8;
+  --info-border: #d6bffe;
 
   /* lines + shape */
   --border: #e8ecea;
@@ -39,9 +39,31 @@
   --radius-xs: 11px;
 
   /* elevation (soft, no gradient) */
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 18px 40px -12px rgba(12, 31, 23, 0.18);
+  --shadow-sm: 0 1px 2px rgba(25, 15, 42, 0.04);
+  --shadow-md: 0 6px 18px rgba(25, 15, 42, 0.06);
+  --shadow-lg: 0 18px 40px -12px rgba(19, 12, 31, 0.18);
+}
+
+/* ── DARK MODE (toggled from the dashboard via theme.js) ── */
+body.darkmode {
+  --accent-soft: rgba(109, 45, 219, 0.14);
+  --accent-ring: rgba(109, 45, 219, 0.30);
+
+  --ink: #0f0b16;
+  --bg: #130f1a;
+  --card: #221b2d;
+  --surface: #191422;
+
+  --text: #f7f4fb;
+  --text2: #a49ab5;
+  --text3: #776b8c;
+
+  --border: #322a3f;
+  --border-strong: #40384f;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 18px 40px -12px rgba(0, 0, 0, 0.6);
 }
 
 body {
@@ -99,13 +121,12 @@ body {
   transition: color 0.18s, background 0.18s, border-color 0.18s;
   flex-shrink: 0;
 }
-.nb-home-link:hover { color: var(--accent); background: var(--accent-soft); border-color: #c8eeda; }
 
 /* ── 3-COLUMN LAYOUT: middle (form) + right rail ── */
 .nb-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 24px;
+  gap: 15px;
   align-items: start;
 }
 
@@ -121,7 +142,7 @@ body {
 
 /* ── BALANCE CARD (top of right rail) ── */
 .nb-balance-card {
-  background: rgb(45, 156, 219);
+  background: var(--accent) ;
   border-radius: var(--radius);
   padding: 24px 22px;
   box-shadow: var(--shadow-lg);
@@ -135,8 +156,17 @@ body {
   right: -40px; top: -40px;
   width: 140px; height: 140px;
   border-radius: 50%;
-  background: rgba(10, 124, 78, 0.35);
+  background: rgba(255, 255, 255, 0.12);
   filter: blur(8px);
+}
+
+.nb-bal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .nb-bal-label {
@@ -145,7 +175,32 @@ body {
   text-transform: uppercase;
   letter-spacing: 1.4px;
   font-weight: 600;
-  margin-bottom: 10px;
+}
+
+/* eye toggle */
+.nb-bal-eye {
+  width: 34px; height: 34px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.nb-bal-eye .eye-closed { display: none; }
+.nb-bal-eye.is-hidden .eye-open { display: none; }
+.nb-bal-eye.is-hidden .eye-closed { display: block; }
+
+/* blurred (hidden) balance */
+.nb-bal-amount {
+  transition: filter 0.2s ease;
+}
+.nb-bal-amount.nb-bal-blur {
+  filter: blur(10px);
+  user-select: none;
 }
 
 .nb-bal-amount {
@@ -192,18 +247,13 @@ body {
 .nb-quick-avatar {
   width: 52px; height: 52px;
   border-radius: 50%;
-  background: rgb(45, 156, 219) ;
+  background: var(--accent);
   color:  white;
   font-weight: 700;
   font-size: 19px;
   display: flex; align-items: center; justify-content: center;
-  border: 1px solid #c8eeda;
+  border: 1px solid #d3bff5;
   transition: transform 0.16s, box-shadow 0.16s;
-}
-
-.nb-quick-item:hover .nb-quick-avatar {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px -8px var(--accent-ring);
 }
 
 .nb-quick-name {
@@ -226,11 +276,11 @@ body {
 
 /* ── SECURE YOUR FUTURE PROMO (bottom of right rail) ── */
 .nb-promo {
-  background: blueviolet;
+  background: #33136b ;
   border-radius: var(--radius);
   padding: 24px 22px;
   color: #fff;
-  box-shadow: 0 18px 40px -16px  green;
+  box-shadow: 0 18px 40px -16px rgba(19, 12, 31, 0.55);
   position: relative;
   overflow: hidden;
 }
@@ -328,6 +378,22 @@ body {
   .nb-success-amount { font-size: 34px; }
 }
 
+/* Very small phones (~300–340px) */
+@media (max-width: 340px) {
+  .nb-shell { padding: 58px 10px 36px; }
+  .nb-page-title { font-size: 20px; }
+  .nb-card, .nb-balance-card, .nb-promo { padding: 16px 14px; }
+  .nb-bal-amount { font-size: 23px; }
+  .nb-acct-num { font-size: 15px; }
+  .nb-input { font-size: 15px; padding: 13px 14px; }
+  .nb-amount-input { font-size: 19px; padding-left: 32px; }
+  .nb-currency { font-size: 18px; }
+  .nb-btn { padding: 14px 16px; font-size: 15px; }
+  .nb-pin-input { font-size: 22px; letter-spacing: 8px; }
+  .nb-success-amount { font-size: 30px; }
+  /* receipt columns already stack (from the 768 rule) */
+}
+
 /* ── CARD ── */
 .nb-card {
   background: var(--card);
@@ -352,7 +418,7 @@ body {
 .nb-card-accent {
   width: 7px; height: 7px;
   border-radius: 70%;
-  background: green;
+  background: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
@@ -392,7 +458,7 @@ body {
   box-shadow: 0 0 0 4px var(--accent-ring);
 }
 
-.nb-input.nb-input-ok { border-color: var(--accent); background: #fbfffd; }
+.nb-input.nb-input-ok { border-color: var(--accent); background: var(--accent-soft); }
 .nb-input.nb-input-err { border-color: var(--danger); background: #fffbfb; }
 
 /* ── AMOUNT INPUT ── */
@@ -423,7 +489,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
   padding: 13px 15px;
   border-radius: var(--radius-sm);
   background: var(--accent-soft);
-  border: 1px solid #c8eeda;
+  border: 1px solid #d3bff5;
   animation: slideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -445,12 +511,12 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 }
 
 .nb-receiver-name {
-  font-weight: 700; font-size: 15px; color: #0a5638;
+  font-weight: 700; font-size: 15px; color: #3a127f;
   letter-spacing: -0.2px;
 }
 
 .nb-receiver-tag {
-  font-size: 11px; color: #0a7c4e; margin-top: 3px;
+  font-size: 11px; color: #6d2ddb; margin-top: 3px;
   font-weight: 600;
 }
 
@@ -510,7 +576,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 .nb-btn {
   width: 100%;
   padding: 16px 20px;
-  background: rgb(45, 156, 219);
+  background: var(--accent);
   color: #fff;
   border: none;
   border-radius: var(--radius-sm);
@@ -520,7 +586,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
   display: flex; align-items: center; justify-content: center; gap: 9px;
   transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
   letter-spacing: 0.1px;
-  box-shadow: 0 8px 20px -8px rgba(10, 124, 78, 0.5);
+  box-shadow: 0 8px 20px -8px rgba(109, 45, 219, 0.5);
 }
 
 
@@ -541,7 +607,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
   transition: color 0.18s, background 0.18s;
 }
 
-.nb-back-btn:hover { color: var(--accent); background: var(--accent-soft); }
 
 .nb-pin-icon {
   width: 74px; height: 74px;
@@ -765,6 +830,98 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 }
 
 .nb-status-ok { color: var(--accent) !important; }
+
+/* ══════════════════════════════════════════════
+   CARDS ON OFFER — left column (desktop only)
+   ══════════════════════════════════════════════ */
+.nb-col-cards { display: none; }   /* hidden by default; shown at ≥1200px */
+
+.nb-cards-head { margin-bottom: 2px; }
+.nb-cards-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+.nb-cards-sub {
+  font-size: 12.5px;
+  color: var(--text2);
+  margin-top: 4px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+
+.pay-card-img {
+  position: relative;
+  inset: 0;
+  z-index: 2;
+  min-width: 250px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: transparent;
+  font-size: 0;
+}
+
+/* brand backgrounds */
+
+.pay-card--master { background: none;}
+.pay-card--visa   { background:none ;
+}
+.pay-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+/* EMV chip */
+.pay-chip {
+  width: 34px; height: 26px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f6d365, #d4a017);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+/* network wordmarks */
+.pay-network { font-weight: 800; font-size: 18px; letter-spacing: 0.5px; }
+.pay-network--verve { font-style: italic; text-transform: lowercase; }
+.pay-network--visa  { font-style: italic; letter-spacing: 1.5px; }
+
+.pay-card-number {
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.pay-card-foot { font-size: 10px; letter-spacing: 1px; opacity: 0.9; font-weight: 600; }
+
+/* Mastercard interlocking circles */
+.pay-mc { display: inline-flex; align-items: center; }
+.pay-mc-a, .pay-mc-b { width: 22px; height: 22px; border-radius: 50%; }
+.pay-mc-a { background: #eb001b; }
+.pay-mc-b { background: #f79e1b; margin-left: -9px; mix-blend-mode: screen; }
+
+/* show the cards column only on wide desktops */
+@media (min-width: 1200px) {
+  .nb-layout { grid-template-columns: 230px minmax(0, 1fr) 360px; }
+  .nb-col-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: sticky;
+    top: 28px;
+  }
+}
 
 /* ── UTILITY ── */
 .nb-hidden { display: none !important; }

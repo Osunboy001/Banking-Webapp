@@ -107,6 +107,16 @@ async function loadDashboard() {
 
 
  
+// Render an avatar element as either the uploaded image or the name initial.
+function setAvatar(el, profilePicture, letter) {
+  if (!el) return;
+  if (profilePicture) {
+    el.innerHTML = `<img src="${profilePicture}" alt="Profile picture" />`;
+  } else {
+    el.textContent = letter;
+  }
+}
+
 function renderDashboard() {
   const cacheUser = JSON.parse(localStorage.getItem("myuser"))
   console.log('this is the catche:', cacheUser)
@@ -115,9 +125,10 @@ function renderDashboard() {
 console.log('this is the user:', user)
   const avatarName = user.name
   const avatarLetter = avatarName.charAt(0).toUpperCase();
-  document.getElementById("avatarInitial").textContent = avatarLetter;
-  const avatarLg = document.getElementById("avatarInitialLg");
-  if (avatarLg) avatarLg.textContent = avatarLetter;
+  // Show the uploaded profile picture if the user has one, otherwise fall back
+  // to the first letter of their name.
+  setAvatar(document.getElementById("avatarInitial"), user.profilePicture, avatarLetter);
+  setAvatar(document.getElementById("avatarInitialLg"), user.profilePicture, avatarLetter);
 
   const firstName = user.name.split(" ")[0];
   const greetingEl = document.getElementById("greeting");
@@ -445,7 +456,7 @@ function toggleSidebar() {
   overlay.classList.toggle('active')
 }
 
-// Close sidebar when clicking menu item (mobile)
+//  Toogle Responsive
 document.querySelectorAll('.menu-item').forEach(item => {
   item.addEventListener('click', () => {
     if (window.innerWidth <= 768) {
@@ -565,72 +576,8 @@ function renderMoneyFlow(received, sent) {
 }
 
 
-function applyBgOnScreen(query, color, othercolor) {
-  const mq = window.matchMedia(query);
-
-  function update() {
-    if (mq.matches) {
-        as.forEach(a => {
-              a.style.color = othercolor;
-      });
-
-      navLink.style.backgroundColor = color;
-
-      
-    } else {
-      document.body.style.backgroundColor = "";
-    }
-  }
-
-  update();
-  mq.addEventListener("change", update);
-}
-
-
-let darkmode = localStorage.getItem('darkmode');
-
-const themeSwitch = document.querySelector('.themeSwitch');
-const lastSvg = themeSwitch.querySelector("svg:last-of-type");
-const firstSvg = themeSwitch.querySelector("svg:first-of-type");
 
 
 
 
 
-const enableDarkmode = () => {
-     applyBgOnScreen("(max-width: 900px)", "white", "black" );
-  lastSvg.style.display = "block";
-  firstSvg.style.display = "none"
-  document.body.classList.add('darkmode');
-  localStorage.setItem('darkmode', 'active');
-};
-
-const disableDarkmode = () => {
-      // APPLy FUNCTION
-applyBgOnScreen( "(max-width:900px)", "black", "white")
- 
-   firstSvg.style.display = "block";
-lastSvg.style.display = "none"
-  document.body.classList.remove('darkmode');
-  localStorage.removeItem('darkmode');
-  
-firstSvg.style.display = "inline-block";
-};
-
-if (darkmode === 'active') {
-  
-  enableDarkmode();
-}
-else  {
-  
-  disableDarkmode()
-}
-
-
-
-
-themeSwitch.addEventListener('click', () => {
-  console.log('darkmode click')
-  darkmode = localStorage.getItem('darkmode');
-  darkmode === 'active' ? disableDarkmode() : enableDarkmode();
-});

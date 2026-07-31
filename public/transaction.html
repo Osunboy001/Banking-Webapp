@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NairaBank — Send Money</title>
   <link rel="stylesheet" href="transaction.css">
+  <link rel="stylesheet" href="/main-sidebar.css">
 </head>
 <body>
 <div id="sidebar-container"></div>
@@ -27,6 +28,29 @@
   </header>
 
   <div class="nb-layout">
+
+    <!-- ════ LEFT: CARDS ON OFFER (desktop only) ════ -->
+    <aside class="nb-col-cards">
+      <div class="nb-cards-head">
+        <h3 class="nb-cards-title">Cards Available</h3>
+        <p class="nb-cards-sub">Order a debit card for anyone who needs one.</p>
+      </div>
+
+      <!-- VERVE — drop your image at public/img/verve-card.png -->
+      <div class="pay-card pay-card--verve">
+        <img class="pay-card-img" src="./img/mscard.png">
+      </div>
+
+      <!-- MASTERCARD — drop your image at public/img/mastercard-card.png -->
+      <div class="pay-card pay-card--master">
+        <img class="pay-card-img" src="./img/visa.png" alt="Mastercard debit card">
+      </div>
+
+      <!-- VISA — drop your image at public/img/visa-card.png -->
+      <div class="pay-card pay-card--visa">
+        <img class="pay-card-img" src="./img/visaa.png" alt="Visa debit card">
+      </div>
+    </aside>
 
     <!-- ════ MIDDLE: TRANSFER FLOW ════ -->
     <main class="nb-col-main">
@@ -59,7 +83,7 @@
                 <div class="nb-receiver-tag">Verified Account</div>
               </div>
               <div class="nb-check-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a7c4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6d2ddb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               </div>
@@ -128,7 +152,7 @@
           </button>
 
           <div class="nb-pin-icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0a7c4e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6d2ddb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
@@ -203,7 +227,7 @@
       <div id="successSection" class="nb-hidden">
         <div class="nb-card nb-success-card">
           <div class="nb-success-icon-wrap">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0a7c4e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6d2ddb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
@@ -243,7 +267,17 @@
 
       <!-- BALANCE (top) -->
       <div class="nb-balance-card">
-        <div class="nb-bal-label">Available Balance</div>
+        <div class="nb-bal-top">
+          <div class="nb-bal-label">Available Balance</div>
+          <button class="nb-bal-eye" id="balEyeBtn" type="button" aria-label="Hide balance" onclick="toggleBalance()">
+            <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+          </button>
+        </div>
         <div class="nb-bal-amount" id="balanceDisplay">₦--</div>
         <div class="nb-acct-num" id="acctDisplay">Loading...</div>
       </div>
@@ -278,14 +312,18 @@
   </div>
 </div>
 
-  <script>
-    fetch('main-sidebar.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("sidebar-container").innerHTML = data;
-      });
-  </script>
-
+  <script src="/sidebar.js"></script>
+  <script src="theme.js"></script>
   <script src="transaction.js"></script>
+  <script>
+    // Show/hide the available balance (blurs the amount; real value stays in the DOM)
+    function toggleBalance() {
+      const amt = document.getElementById('balanceDisplay');
+      const btn = document.getElementById('balEyeBtn');
+      const hidden = amt.classList.toggle('nb-bal-blur');
+      btn.classList.toggle('is-hidden', hidden);
+      btn.setAttribute('aria-label', hidden ? 'Show balance' : 'Hide balance');
+    }
+  </script>
 </body>
 </html>

@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="main-sidebar.css">
-</head>
-<body>
-  
 
-<!-- OVERLAY (for mobile) -->
 <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
 
 <!-- TOGGLE BUTTON -->
 <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">☰</button>
-  <div class="sidebar" id="sidebar">
+
+<div class="sidebar" id="sidebar">
   <div class="sideba-header">
     <h3>NairaBank</h3>
     <button class="close-btn" onclick="toggleSidebar()">✕</button>
@@ -22,28 +12,28 @@
 
   <div class="sidebar-menu">
     <a href="login-user.html" class="menu-item">
-      <img src="img/dashboard.png" alt="Send" width="25" height="25" style=" background-color: white; border-radius: 50%;">
+     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
       <span class="label">Dashboard</span>
     </a>
     <a href="full-history.html" class="menu-item">
-         <img src="img/file.png" alt="Send" width="25" height="25" style=" background-color: white; border-radius: 50%;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history-icon lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
       <span class="label">History</span>
     </a>
     <a href="/transaction.html" class="menu-item">
-           <img src="img/transfer.png" alt="Send" width="25" height="25" style=" background-color: white; border-radius: 50%;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
       <span class="label">Transfer</span>
     </a>
     <a href="/deposit.html" class="menu-item">
-   <img src="img/donation.png" alt="Send" width="25" height="25" style=" background-color: white; border-radius: 50%;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-warehouse-icon lucide-warehouse"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11"/><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z"/><path d="M6 13h12"/><path d="M6 17h12"/></svg>
       <span class="label">Deposit</span>
     </a>
     <a href="/create-pin.html" class="menu-item">
-         <img src="img/key.png" alt="Send" width="25" height="25" style=" background-color: white; border-radius: 50%;">
+       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round-icon lucide-key-round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
       <span class="label">Create PIN</span>
     </a>
 
-     <a href="/create-pin.html" class="menu-item">
-    <img src="img/settings.png" alt="Send" width="25" height="25" style=" background-color: white; border-radius: 50%;">
+     <a href="/settings.html" class="menu-item">
+   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg>
       <span class="label">Settings</span>
     </a>
   </div>
@@ -54,14 +44,3 @@
     </a>
   </div>
 </div>
-  <script>
-    fetch('main-sidebar.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("sidebar-container").innerHTML = data;
-      });
-  </script>
-
-<script src="main-siderbar.js"></script>
-</body>
-</html>

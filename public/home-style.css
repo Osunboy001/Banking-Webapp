@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --blue: blue;
-  --blue-light: rgba(0, 0, 255, 0.08);
-  --blue-shadow: rgba(0, 0, 255, 0.3);
-  --text-dark: #0d0d1a;
-  --text-mid: #444466;
-  --text-soft: #888aaa;
-  --bg: #eef0f8;
+  --blue: #7c3aed;
+  --blue-light: rgba(94, 0, 255, 0.08);
+  --blue-shadow: rgba(94, 0, 255, 0.3);
+  --text-dark: #120d1a;
+  --text-mid: #504466;
+  --text-soft: #9488aa;
+  --bg: #f2eef8;
   --card: #ffffff;
-  --border: #dde0f0;
+  --border: #e4ddf0;
 }
 
 * {
@@ -127,7 +127,7 @@ body {
 }
 
 .users-list li {
-  background: #f7f8fd;
+  background: #f9f7fd;
   border: 2px solid var(--border);
   border-radius: 18px;
   padding: 26px 32px;
@@ -139,9 +139,9 @@ body {
 }
 
 .users-list li:hover {
-  border-color: blue;
+  border-color: #7c3aed;
   background: var(--blue-light);
-  box-shadow: 0 8px 28px rgba(0,0,255,0.12);
+  box-shadow: 0 8px 28px rgba(94, 0, 255, 0.12);
   transform: translateY(-2px);
 }
 
@@ -162,12 +162,12 @@ body {
 .user-info .balance {
   font-size: 20px;
   font-weight: 600;
-  color: blue;
+  color: #7c3aed;
 }
 
 /* ── Deposit Button ── */
 .deposit-btn {
-  background: blue;
+  background: #7c3aed;
   color: white;
   padding: 15px 32px;
   border: none;
@@ -222,19 +222,19 @@ body {
   font-family: 'Sora', sans-serif;
   font-weight: 500;
   color: var(--text-dark);
-  background: #f7f8fd;
+  background: #f9f7fd;
   transition: all 0.2s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: blue;
+  border-color: #7c3aed;
   background: white;
-  box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(94, 0, 255, 0.1);
 }
 
 .form-group input::placeholder {
-  color: #bbbbd4;
+  color: #c4bbd4;
   font-weight: 400;
 }
 
@@ -247,7 +247,7 @@ body {
 .submit-btn {
   width: 100%;
   padding: 18px;
-  background: blue;
+  background: #7c3aed;
   color: white;
   border: none;
   border-radius: 14px;

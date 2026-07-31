@@ -79,7 +79,7 @@ async function loadQuickSend() {
       .map(recipient => `
         <button class="nb-quick-item" onclick="quickSend('${recipient.accountnumber}')">
           <span class="nb-quick-avatar">${recipient.name.charAt(0).toUpperCase()}</span>
-          <span class="nb-quick-name">${recipient.name.split(" ")[0]}</span>
+          <span class="nb-quick-name">${recipient.name}</span>
         </button>
       `)
       .join("")
